@@ -6,6 +6,7 @@ import GameMemory from "../GameMemory";
 import { Role } from "../constants";
 import { StructureContainer } from "game/prototypes";
 import Hauler from "creeps/Hauler";
+import Miner from "creeps/Miner";
 import Log from "utils/Logger";
 
 class MiningSquad extends BaseSquad {
@@ -37,7 +38,7 @@ class MiningSquad extends BaseSquad {
       if (member instanceof Hauler) {
         // if (member.role === Role.HAULER) {
         if (member.creep) {
-          // TODO: reimplement?
+          // TODO: reimplement? -> move to Hauler class?
           const container: StructureContainer | null = memory.getCloseContainer(
             member.creep,
           );
@@ -55,7 +56,9 @@ class MiningSquad extends BaseSquad {
             member.target = memory.mySpawn;
           }
         }
-
+      } else if (member instanceof Miner) {
+      }
+      if (member.creep) {
         member.run();
       }
     });

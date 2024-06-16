@@ -32,7 +32,7 @@ class SquadController {
       case MINING:
         mySquad = new MiningSquad(
           this.squadCounter,
-          [Role.HAULER, Role.HAULER], // TODO: add Miner
+          [Role.MINER, Role.HAULER, Role.HAULER],
           spawnQueue,
         );
         break;

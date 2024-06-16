@@ -3,8 +3,9 @@
 import { Creep } from "game/prototypes";
 import BaseCreep from "creeps/BaseCreep";
 //import { Creep } from '/game/prototypes';
-import { HAULER, SOLDIER, SNIPER, HEALER, Role } from "../constants";
+import { HAULER, SOLDIER, SNIPER, HEALER, Role, MINER } from "../constants";
 import Hauler from "../creeps/Hauler";
+import Miner from "../creeps/Miner";
 import Soldier from "../creeps/Soldier";
 import SpawnQueue from "../SpawnQueue";
 import GameMemory from "../GameMemory";
@@ -28,7 +29,7 @@ class BaseSquad {
     // let formationLine = [];
 
     console.log(
-      "[D] request received to create a squad with roles: " +
+      "[D] Request received to create a squad with roles: " +
         JSON.stringify(roles),
     );
     this.id = id;
@@ -38,6 +39,9 @@ class BaseSquad {
       switch (role) {
         case HAULER:
           member = new Hauler(spawnQueue, this, this.lastMemberId);
+          break;
+        case MINER:
+          member = new Miner(spawnQueue, this, this.lastMemberId);
           break;
         // case SOLDIER:
         //   member = new Soldier(spawnQueue, this, this.lastMemberId);
