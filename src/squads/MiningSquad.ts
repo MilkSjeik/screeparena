@@ -35,6 +35,7 @@ class MiningSquad extends BaseSquad {
     this.members.forEach((member) => {
       Log.debug("MiningSquad", "Found member: " + JSON.stringify(member));
       // If hauler: set target to retrieve energy
+      // TODO: we never get into this next part? -> what type is member?
       if (member instanceof Hauler) {
         // if (member.role === Role.HAULER) {
         if (member.creep) {
