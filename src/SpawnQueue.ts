@@ -2,6 +2,8 @@
 
 import { getObjectsByPrototype } from "game/utils";
 import { Creep, StructureSpawn } from "game/prototypes";
+// TODO: Spawning isn't known by game/prototypes
+// import { Creep, StructureSpawn, Spawning } from "game/prototypes";
 import SquadController from "./SquadController";
 import { CreepBody, Role } from "./constants";
 //import _ from "./utils/lodash-4.17.21-es/lodash";
@@ -40,6 +42,7 @@ class SpawnQueue {
 
   // Public methods
   spawn() {
+   }
     // console.log(
     //   "[D] SpawnQueue - Current spawn queue: " + JSON.stringify(this.#queue),
     // );
@@ -48,9 +51,12 @@ class SpawnQueue {
       const firstInQueue = this.#queue[0];
       // if yes: try to spawn
       const creep: Creep | undefined = this.mySpawn.spawnCreep(
-        firstInQueue.body,
-      ).object;
-      // check result:
+        firstInQueue.body // body
+     ).object;
+    // TODO: add to memory?
+        // firstInQueue.squad.id + "|" + firstInQueue.memberId,
+        // { memory: { role: firstInQueue.role } }, // memory
+       // check result:
       if (creep === undefined) {
         // undefined = already busy
       } else {

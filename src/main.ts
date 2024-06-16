@@ -22,7 +22,8 @@ let myMemory: GameMemory;
 let mySquadController: SquadController;
 let mySpawnQueue: SpawnQueue;
 
-Log.logLevel = LogLevel.INFO;
+// Log.logLevel = LogLevel.INFO;
+Log.logLevel = LogLevel.DEBUG;
 
 Log.debug("Main", "LogLevel: " + Log.logLevel);
 

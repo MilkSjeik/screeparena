@@ -9,5 +9,14 @@
   - [x] Enable/disable logging levels
   - [x] Implement different logging levels
 - Creep spawning
-  - [ ] Find other way to identify creep type after spawning
-  - [ ] Add creep to Squad
+  - [ ] Find other way to identify creep type after spawning (`./src/SpawnQueue.ts`)
+    - Verify documentation
+    - Check if Typescript/types version is correct
+
+```Typescript
+    if (this.mySpawn.spawning istypeof Spawning) {
+      return;
+    }
+```
+
+- [ ] Add creep to Squad
