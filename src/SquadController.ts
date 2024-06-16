@@ -30,11 +30,7 @@ class SquadController {
 
     switch (squadType) {
       case MINING:
-        mySquad = new MiningSquad(
-          this.squadCounter,
-          [Role.MINER, Role.HAULER, Role.HAULER],
-          spawnQueue,
-        );
+        mySquad = new MiningSquad(this.squadCounter, spawnQueue);
         break;
       // case ASSAULT:
       //   // TODO: implement healer and sniper

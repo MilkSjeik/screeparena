@@ -16,8 +16,8 @@ class MiningSquad extends BaseSquad {
    * @param {Array} roles - An array of creep roles
    * @param {SpawnQueue} spawnQueue - Squad spawn location
    */
-  constructor(id: number, roles: Role[], spawnQueue: SpawnQueue) {
-    super(id, roles, spawnQueue);
+  constructor(id: number, spawnQueue: SpawnQueue) {
+    super(id, [Role.MINER, Role.HAULER, Role.HAULER], spawnQueue);
   }
 
   // Methods
