@@ -42,7 +42,6 @@ class SpawnQueue {
 
   // Public methods
   spawn() {
-   }
     // console.log(
     //   "[D] SpawnQueue - Current spawn queue: " + JSON.stringify(this.#queue),
     // );
