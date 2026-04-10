@@ -27,16 +27,16 @@ export { SquadType };
 const HAULER = "hauler";
 const MINER = "miner";
 const SOLDIER = "soldier";
-const SNIPER = "sniper";
+const RANGED = "ranged";
 const HEALER = "healer";
 
-export { HAULER, MINER, SOLDIER, SNIPER, HEALER };
+export { HAULER, MINER, SOLDIER, RANGED, HEALER };
 
 enum Role {
   HAULER = "hauler",
   MINER = "miner",
   SOLDIER = "soldier",
-  SNIPER = "sniper",
+  RANGED = "ranged",
   HEALER = "healer",
 }
 
