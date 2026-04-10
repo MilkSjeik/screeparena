@@ -1,3 +1,7 @@
+# TODO List
+
+## Game logic
+
 - [x] Adjust `MiningSquad` to determine the correct creep type, e.g.: HAULER
 - [x] Modify TypeScript config to:
   - [x] Build the right script that can be used by the game, see examples:
@@ -20,3 +24,7 @@
 ```
 
 - [ ] Add creep to Squad
+
+## Project structure
+
+- [ ] Add prettier and eslint
