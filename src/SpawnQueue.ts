@@ -64,6 +64,7 @@ class SpawnQueue {
         if (creep instanceof Object) {
           // creep is spawning, remove from queue
           console.log("[D] SpawnQueue - remove from queue");
+          firstInQueue.squad.updateMember(firstInQueue.memberId, creep);
           this.#queue = _.drop(this.#queue);
         }
         // TODO: find other way to identify creep type after spawning
