@@ -3,7 +3,7 @@
   "mcp": {
     "screeps": {
       "type": "local",
-      "command": ["bun", "x", "../screeps-mcp/src/server.js"],
+      "command": ["bun", "../screeps-mcp/src/server.js"],
       "environment": {
         "SCREEPS_DOCS_INDEX": "../screeps-mcp/docs-index.json"
       }
