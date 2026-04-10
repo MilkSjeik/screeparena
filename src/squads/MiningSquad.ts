@@ -4,7 +4,6 @@ import BaseSquad from "./BaseSquad";
 import SpawnQueue from "../SpawnQueue";
 import GameMemory from "../GameMemory";
 import { Role } from "../constants";
-import { StructureContainer } from "game/prototypes";
 import Hauler from "creeps/Hauler";
 import Miner from "creeps/Miner";
 import Log from "utils/Logger";
@@ -34,30 +33,14 @@ class MiningSquad extends BaseSquad {
     // for each member in the squad
     this.members.forEach((member) => {
       Log.debug("MiningSquad", "Found member: " + JSON.stringify(member));
-      // If hauler: set target to retrieve energy
-      // TODO: we never get into this next part? -> what type is member?
       if (member instanceof Hauler) {
-        // if (member.role === Role.HAULER) {
-        if (member.creep) {
-          // TODO: reimplement? -> move to Hauler class?
-          const container: StructureContainer | null = memory.getCloseContainer(
-            member.creep,
-          );
-
-          if (container !== null) {
-            Log.debug(
-              "MiningSquad",
-              "Setting container as source" + JSON.stringify(container),
-            );
-            member.source = container;
-            Log.debug(
-              "MiningSquad",
-              "Set container as source" + JSON.stringify(member.source),
-            );
-            member.target = memory.mySpawn;
-          }
-        }
+        member.target = memory.mySpawn;
       } else if (member instanceof Miner) {
+        if (member.creep && !member.source) {
+          // Miner picks its source on demand.
+          member.run();
+          return;
+        }
       }
       if (member.creep) {
         member.run();
