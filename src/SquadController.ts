@@ -8,7 +8,7 @@ import _ from "lodash";
 import MiningSquad from "./squads/MiningSquad";
 import AssaultSquad from "./squads/AssaultSquad";
 import { ASSAULT, MINING, SquadType } from "./constants";
-import { Role, HAULER, SOLDIER, SNIPER, HEALER } from "./constants";
+import { Role, HAULER, SOLDIER, RANGED, HEALER } from "./constants";
 import SpawnQueue from "SpawnQueue";
 import BaseSquad from "squads/BaseSquad";
 import GameMemory from "GameMemory";
@@ -32,14 +32,9 @@ class SquadController {
       case MINING:
         mySquad = new MiningSquad(this.squadCounter, spawnQueue);
         break;
-      // case ASSAULT:
-      //   // TODO: implement healer and sniper
-      //   //mySquad = new AssaultSquad(this.squadCounter, [SOLDIER, SOLDIER, SNIPER, HEALER], spawnQueue);
-      //   mySquad = new AssaultSquad(
-      //     this.squadCounter,
-      //     [SOLDIER, SOLDIER],
-      //     spawnQueue
-      //   );
+      case ASSAULT:
+        mySquad = new AssaultSquad(this.squadCounter, spawnQueue);
+        break;
       default:
         break;
     }
