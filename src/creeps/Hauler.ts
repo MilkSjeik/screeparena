@@ -2,14 +2,15 @@
 
 import BaseCreep from "./BaseCreep";
 import { CARRY, MOVE, ERR_NOT_IN_RANGE, RESOURCE_ENERGY } from "game/constants";
-import { Structure, StructureSpawn } from "game/prototypes";
-import { HAULER, Role } from "../constants";
+import { Resource, StructureSpawn } from "game/prototypes";
+import { getObjectsByPrototype } from "game/utils";
+import { Role } from "../constants";
 import SpawnQueue from "../SpawnQueue";
 import BaseSquad from "squads/BaseSquad";
 
 class Hauler extends BaseCreep {
   // Private
-  #source: Structure | undefined; // TODO: replace with more specific objects
+  #source: Resource | undefined;
   #target: StructureSpawn | undefined;
 
   /**
@@ -51,38 +52,23 @@ class Hauler extends BaseCreep {
    */
   run() {
     if (this.creep != undefined) {
-      console.log(
-        "[D] Run Hauler - Target: " +
-          JSON.stringify(this.#target) +
-          "for creep with id: " +
-          this.creep.id,
-      );
-      if (this.#target === undefined) {
-        console.log("[E] Energy target not defined for creep " + this.creep.id);
-      } else if (this.#source === undefined) {
-        console.log("[E] Energy source not defined for creep " + this.creep.id);
-        // Verify if this.#source is a type of StructureConstant
-      } else if (this.#source instanceof Structure) {
-        console.log("[D] Source: " + JSON.stringify(this.#target));
-        if (this.creep.store[RESOURCE_ENERGY] == 0) {
-          console.log("[D] Trying to withdraw some energy");
-          if (
-            this.creep.withdraw(this.#source, RESOURCE_ENERGY) ==
-            ERR_NOT_IN_RANGE
-          ) {
-            console.log("[D] Not in range, moving closer!");
+      if (this.creep.store[RESOURCE_ENERGY] == 0) {
+        if (!this.#source || !this.#source.exists) {
+          const droppedEnergy = getObjectsByPrototype(Resource).filter(
+            (resource) => resource.resourceType === RESOURCE_ENERGY && resource.amount > 0,
+          );
+          this.#source = this.creep.findClosestByRange(droppedEnergy) ?? undefined;
+        }
+
+        if (this.#source) {
+          if (this.creep.pickup(this.#source) == ERR_NOT_IN_RANGE) {
             this.creep.moveTo(this.#source);
           }
-        } else {
-          // on top of container = transfer energy
-          console.log("[D] Transfer energy");
-          if (
-            this.creep.transfer(this.#target, RESOURCE_ENERGY) ==
-            ERR_NOT_IN_RANGE
-          ) {
-            console.log("[D] Not in range, moving closer!");
-            this.creep.moveTo(this.#target);
-          }
+        }
+      } else if (this.#target) {
+        this.#source = undefined;
+        if (this.creep.transfer(this.#target, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
+          this.creep.moveTo(this.#target);
         }
       }
     }
