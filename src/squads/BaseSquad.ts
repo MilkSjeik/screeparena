@@ -3,10 +3,12 @@
 import { Creep } from "game/prototypes";
 import BaseCreep from "creeps/BaseCreep";
 //import { Creep } from '/game/prototypes';
-import { HAULER, SOLDIER, SNIPER, HEALER, Role, MINER } from "../constants";
+import { HAULER, SOLDIER, RANGED, HEALER, Role, MINER } from "../constants";
 import Hauler from "../creeps/Hauler";
 import Miner from "../creeps/Miner";
 import Soldier from "../creeps/Soldier";
+import Ranged from "../creeps/Ranged";
+import Healer from "../creeps/Healer";
 import SpawnQueue from "../SpawnQueue";
 import GameMemory from "../GameMemory";
 
@@ -43,13 +45,15 @@ class BaseSquad {
         case MINER:
           member = new Miner(spawnQueue, this, this.lastMemberId);
           break;
-        // case SOLDIER:
-        //   member = new Soldier(spawnQueue, this, this.lastMemberId);
-        //   break;
-        // case SNIPER:
-        //   break;
-        // case HEALER:
-        //   break;
+        case SOLDIER:
+          member = new Soldier(spawnQueue, this, this.lastMemberId);
+          break;
+        case RANGED:
+          member = new Ranged(spawnQueue, this, this.lastMemberId);
+          break;
+        case HEALER:
+          member = new Healer(spawnQueue, this, this.lastMemberId);
+          break;
       }
 
       if (member) {
